@@ -67,7 +67,6 @@ const lightHelper = new THREE.PointLightHelper(sunPointLight)
 const lightHelper2 = new THREE.PointLightHelper(earthPointLight)
 
 
-
 const earthTorusGeometry = new THREE.TorusGeometry(32, 0.1, 10, 100);
 const earthTorusMaterial = new THREE.MeshBasicMaterial();
 const earthTorus = new THREE.Mesh(earthTorusGeometry, earthTorusMaterial);
