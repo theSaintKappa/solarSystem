@@ -45,7 +45,10 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 // cam position
-camera.position.set(0, 27, 52);
+camera.position.set(0, 34, 70);
+// x: -1.5644449155385056;
+// y: 31.41838751659484;
+// z: 67.95823990672223
 
 
 
@@ -67,7 +70,7 @@ const lightHelper = new THREE.PointLightHelper(sunPointLight)
 const lightHelper2 = new THREE.PointLightHelper(earthPointLight)
 
 
-const earthTorusGeometry = new THREE.TorusGeometry(32, 0.1, 10, 100);
+const earthTorusGeometry = new THREE.TorusGeometry(56, 0.1, 10, 100);
 const earthTorusMaterial = new THREE.MeshBasicMaterial();
 const earthTorus = new THREE.Mesh(earthTorusGeometry, earthTorusMaterial);
 earthTorus.rotation.x = Math.PI / 2;
@@ -77,6 +80,16 @@ const moonTorusGeometry = new THREE.TorusGeometry(12, 0.1, 10, 100);
 const moonTorusMaterial = new THREE.MeshBasicMaterial();
 const moonTorus = new THREE.Mesh(moonTorusGeometry, moonTorusMaterial);
 moonTorus.rotation.x = Math.PI / 2;
+
+const mercuryTorusGeometry = new THREE.TorusGeometry(24, 0.1, 10, 100);
+const mercuryTorusMaterial = new THREE.MeshBasicMaterial();
+const mercuryTorus = new THREE.Mesh(mercuryTorusGeometry, mercuryTorusMaterial);
+mercuryTorus.rotation.x = Math.PI / 2;
+
+const venusTorusGeometry = new THREE.TorusGeometry(40, 0.1, 10, 100);
+const venusTorusMaterial = new THREE.MeshBasicMaterial();
+const venusTorus = new THREE.Mesh(venusTorusGeometry, venusTorusMaterial);
+venusTorus.rotation.x = Math.PI / 2;
 
 
 
@@ -101,7 +114,7 @@ const earthMaterial = new THREE.MeshStandardMaterial({
     normalMap: earthBump
 });
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-earth.position.set(32, 0, 0)
+earth.position.set(56, 0, 0)
 
 
 // Moon
@@ -158,6 +171,8 @@ scene.add(
     sun,
     earthTorus,
     mainPointLight,
+    mercuryTorus,
+    venusTorus,
     // earth,
     // moon,
 )

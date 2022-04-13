@@ -2,7 +2,6 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    /* user-select: none; */
 }
 
 #loader {
@@ -13,7 +12,7 @@
     position: absolute;
     z-index: 1;
     opacity: 1;
-    transition: opacity 5s;
+    transition: opacity 4s;
 }
 
 #canvas {
@@ -24,22 +23,25 @@
 }
 
 .container {
-    /* pointer-events: none; */
     position: absolute;
     bottom: 0;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
     padding: 1rem;
-    outline: 1px solid white;
-    /* cursor: pointer; */
+    outline: 2px solid white;
 }
 
 .toggle input[type="checkbox"]:not(.toggle input:last-of-type) {
     margin-bottom: 10px;
 }
 
+.toggle input[type="checkbox"] {
+    transform: scale(2);
+}
+
 .author {
+    pointer-events: none;
     left: 0;
-    border-radius: 0 15px 0 0;
+    border-radius: 0 5px 0 0;
 }
 
 .author span,
@@ -47,14 +49,19 @@
     font-size: 20px;
     font-family: sans-serif;
     color: white;
-    cursor: pointer;
+    /* cursor: pointer; */
+}
+
+.toggle label {
+    font-size: 35px;
 }
 
 .toggle {
     right: 0;
-    border-radius: 15px 0 0 0;
+    border-radius: 5px 0 0 0;
     text-align: end;
-    /* cursor: pointer; */
+    cursor: pointer;
+    user-select: none;
 }
 
 .toggle input {
@@ -62,10 +69,4 @@
     cursor: pointer;
     transform: scale(1.5);
     margin-left: 5px;
-}
-
-.toggle input[type="range"] {
-    display: block;
-    width: 100px;
-    margin: 0 !important;
 }
