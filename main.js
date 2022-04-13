@@ -81,8 +81,8 @@ moonTorus.rotation.x = Math.PI / 2;
 
 
 // Sun
-const sunTexture = new THREE.TextureLoader().load('assets/sun.jpg');
-// const sunBump = new THREE.TextureLoader().load('assets/earth-normalmap.jpg');
+const sunTexture = new THREE.TextureLoader().load('/sun.jpg');
+// const sunBump = new THREE.TextureLoader().load('earth-normalmap.jpg');
 const sunGeometry = new THREE.SphereGeometry(8, 64, 32)
 const sunMaterial = new THREE.MeshBasicMaterial({
     map: sunTexture,
@@ -93,8 +93,8 @@ sun.position.set(0, 0, 0)
 
 
 // Earth
-const earthTexture = new THREE.TextureLoader().load('assets/earth.jpg');
-const earthBump = new THREE.TextureLoader().load('assets/earth-normalmap.jpg');
+const earthTexture = new THREE.TextureLoader().load('/earth.jpg');
+const earthBump = new THREE.TextureLoader().load('/earth-normalmap.jpg');
 const earthGeometry = new THREE.SphereGeometry(4, 128, 128);
 const earthMaterial = new THREE.MeshStandardMaterial({
     map: earthTexture,
@@ -105,8 +105,8 @@ earth.position.set(32, 0, 0)
 
 
 // Moon
-const moonTexture = new THREE.TextureLoader().load('assets/moon.jpg');
-const moonBump = new THREE.TextureLoader().load('assets/moon-normalmap.jpg');
+const moonTexture = new THREE.TextureLoader().load('/moon.jpg');
+const moonBump = new THREE.TextureLoader().load('/moon-normalmap.jpg');
 const moonGeometry = new THREE.SphereGeometry(1.5, 128, 128);
 const moonMaterial = new THREE.MeshStandardMaterial({
     map: moonTexture,
@@ -223,7 +223,7 @@ function addStar() {
 Array(1000).fill().forEach(addStar)
 
 
-const spaceTexture = new THREE.TextureLoader().load('/assets/space2.jpg')
+const spaceTexture = new THREE.TextureLoader().load('/space2.jpg');
 scene.background = spaceTexture;
 
 
