@@ -2,7 +2,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    user-select: none;
+    /* user-select: none; */
 }
 
 #loader {
@@ -23,16 +23,17 @@
     cursor: crosshair;
 }
 
-.box {
-    pointer-events: none;
+.container {
+    /* pointer-events: none; */
     position: absolute;
     bottom: 0;
     backdrop-filter: blur(10px);
     padding: 1rem;
     outline: 1px solid white;
+    /* cursor: pointer; */
 }
 
-.toggle input:not(.toggle input:last-of-type) {
+.toggle input[type="checkbox"]:not(.toggle input:last-of-type) {
     margin-bottom: 10px;
 }
 
@@ -46,6 +47,7 @@
     font-size: 20px;
     font-family: sans-serif;
     color: white;
+    cursor: pointer;
 }
 
 .toggle {
@@ -62,11 +64,8 @@
     margin-left: 5px;
 }
 
-input[type="range"] {
+.toggle input[type="range"] {
     display: block;
-    /* width: 100%; */
-}
-
-.range {
-    display: none;
+    width: 100px;
+    margin: 0 !important;
 }
