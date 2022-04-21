@@ -70,3 +70,10 @@
     transform: scale(1.5);
     margin-left: 5px;
 }
+
+.stats {
+    padding: .45em;
+    backdrop-filter: blur(16px);
+    border-radius: 0 0 5px;
+    outline: 2px solid white;
+}

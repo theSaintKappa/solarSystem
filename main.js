@@ -1,8 +1,7 @@
 import './style.css'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
-
+import * as Stats from 'stats.js'
 
 THREE.DefaultLoadingManager.onStart = function(url, itemsLoaded, itemsTotal) {
     console.log('Started loading file.');
@@ -26,6 +25,11 @@ THREE.DefaultLoadingManager.onError = function(url) {
 
 
 window.addEventListener("resize", onWindowResize, false);
+
+var stats = new Stats();
+stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+stats.dom.classList.add('stats');
+document.body.appendChild(stats.dom);
 
 
 // scene, camera
@@ -287,6 +291,8 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate);
 
+    stats.begin();
+
     controls.update();
 
     // sun.rotation.y += 0.002;
@@ -309,6 +315,8 @@ function animate() {
 
     moon.rotation.y -= 0.01;
     earth.rotation.y -= 0.002;
+
+    stats.end();
 };
 
 function addStar() {
