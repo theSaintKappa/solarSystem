@@ -285,8 +285,6 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate);
 
-    stats.begin();
-
     controls.update();
 
     // sun.rotation.y += 0.002;
@@ -309,8 +307,6 @@ function animate() {
 
     moon.rotation.y -= 0.01;
     earth.rotation.y -= 0.002;
-
-    stats.end();
 };
 
 function addStar() {
