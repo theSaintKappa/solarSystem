@@ -44,52 +44,90 @@ renderer.setPixelRatio(window.devicePixelRatio);
 // full screen
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-// cam position
-camera.position.set(0, 34, 70);
-// x: -1.5644449155385056;
-// y: 31.41838751659484;
-// z: 67.95823990672223
-
-
-
 // orbit controls & grid
 const controls = new OrbitControls(camera, renderer.domElement);
-const gridHelper = new THREE.GridHelper(200, 50);
+const gridHelper = new THREE.GridHelper(400, 500, 0xff0000, 0x7ea689);
+
+
+controls.addEventListener('end', function() {
+    sessionStorage.setItem('camPosX', camera.position.x);
+    sessionStorage.setItem('camPosY', camera.position.y);
+    sessionStorage.setItem('camPosZ', camera.position.z);
+});
+// camera.position.setX(sessionStorage.getItem('camPosX'));
+// camera.position.setY(sessionStorage.getItem('camPosY'));
+// camera.position.setZ(sessionStorage.getItem('camPosZ'));
+camera.position.set(0, 34, 70);
 
 // ambient light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 
 
 const mainPointLight = new THREE.PointLight(0xffffff, 2.3, 0, 2);
 mainPointLight.position.set(0, 0, 0)
 
 
-const sunPointLight = new THREE.PointLight(0xffffff, 0, 0, 2);
-const earthPointLight = new THREE.PointLight(0xffffff, 0);
-const lightHelper = new THREE.PointLightHelper(sunPointLight)
-const lightHelper2 = new THREE.PointLightHelper(earthPointLight)
+const mercuryAnker = new THREE.PointLight(0xffffff, 0);
+const venusAnker = new THREE.PointLight(0xffffff, 0);
+const earthAnker = new THREE.PointLight(0xffffff, 0);
+const moonAnker = new THREE.PointLight(0xffffff, 0);
 
+const mercuryAnkerHelper = new THREE.PointLightHelper(mercuryAnker, 0.6, 0xd4b728);
+const venusAnkerHelper = new THREE.PointLightHelper(venusAnker, 0.8, 0xad6b07);
+const earthAnkerHelper = new THREE.PointLightHelper(earthAnker, 1, 0x0066ff);
+const moonAnkerHelper = new THREE.PointLightHelper(moonAnker, 1, 0x948f88);
 
-const earthTorusGeometry = new THREE.TorusGeometry(56, 0.1, 10, 100);
-const earthTorusMaterial = new THREE.MeshBasicMaterial();
-const earthTorus = new THREE.Mesh(earthTorusGeometry, earthTorusMaterial);
-earthTorus.rotation.x = Math.PI / 2;
-
-
-const moonTorusGeometry = new THREE.TorusGeometry(12, 0.1, 10, 100);
-const moonTorusMaterial = new THREE.MeshBasicMaterial();
-const moonTorus = new THREE.Mesh(moonTorusGeometry, moonTorusMaterial);
-moonTorus.rotation.x = Math.PI / 2;
 
 const mercuryTorusGeometry = new THREE.TorusGeometry(24, 0.1, 10, 100);
 const mercuryTorusMaterial = new THREE.MeshBasicMaterial();
 const mercuryTorus = new THREE.Mesh(mercuryTorusGeometry, mercuryTorusMaterial);
 mercuryTorus.rotation.x = Math.PI / 2;
 
+
 const venusTorusGeometry = new THREE.TorusGeometry(40, 0.1, 10, 100);
 const venusTorusMaterial = new THREE.MeshBasicMaterial();
 const venusTorus = new THREE.Mesh(venusTorusGeometry, venusTorusMaterial);
 venusTorus.rotation.x = Math.PI / 2;
+
+
+const earthTorusGeometry = new THREE.TorusGeometry(56, 0.1, 10, 100);
+const earthTorusMaterial = new THREE.MeshBasicMaterial();
+const earthTorus = new THREE.Mesh(earthTorusGeometry, earthTorusMaterial);
+earthTorus.rotation.x = Math.PI / 2;
+const moonTorusGeometry = new THREE.TorusGeometry(12, 0.1, 10, 100);
+const moonTorusMaterial = new THREE.MeshBasicMaterial();
+const moonTorus = new THREE.Mesh(moonTorusGeometry, moonTorusMaterial);
+moonTorus.rotation.x = Math.PI / 2;
+
+
+const marsTorusGeometry = new THREE.TorusGeometry(72, 0.1, 10, 100);
+const marsTorusMaterial = new THREE.MeshBasicMaterial();
+const marsTorus = new THREE.Mesh(marsTorusGeometry, marsTorusMaterial);
+marsTorus.rotation.x = Math.PI / 2;
+
+
+const jupiterTorusGeometry = new THREE.TorusGeometry(88, 0.1, 10, 100);
+const jupiterTorusMaterial = new THREE.MeshBasicMaterial();
+const jupiterTorus = new THREE.Mesh(jupiterTorusGeometry, jupiterTorusMaterial);
+jupiterTorus.rotation.x = Math.PI / 2;
+
+
+const saturnTorusGeometry = new THREE.TorusGeometry(104, 0.1, 10, 100);
+const saturnTorusMaterial = new THREE.MeshBasicMaterial();
+const saturnTorus = new THREE.Mesh(saturnTorusGeometry, saturnTorusMaterial);
+saturnTorus.rotation.x = Math.PI / 2;
+
+
+const uranusTorusGeometry = new THREE.TorusGeometry(120, 0.1, 10, 100);
+const uranusTorusMaterial = new THREE.MeshBasicMaterial();
+const uranusTorus = new THREE.Mesh(uranusTorusGeometry, uranusTorusMaterial);
+uranusTorus.rotation.x = Math.PI / 2;
+
+
+const neptuneTorusGeometry = new THREE.TorusGeometry(136, 0.1, 10, 100);
+const neptuneTorusMaterial = new THREE.MeshBasicMaterial();
+const neptuneTorus = new THREE.Mesh(neptuneTorusGeometry, neptuneTorusMaterial);
+neptuneTorus.rotation.x = Math.PI / 2;
 
 
 
@@ -103,6 +141,30 @@ const sunMaterial = new THREE.MeshBasicMaterial({
 })
 const sun = new THREE.Mesh(sunGeometry, sunMaterial)
 sun.position.set(0, 0, 0)
+
+
+// Mercury
+const mercuryTexture = new THREE.TextureLoader().load('/mercury.jpg');
+const mercuryBump = new THREE.TextureLoader().load('/mercury-normalmap.jpg');
+const mercuryGeometry = new THREE.SphereGeometry(2.5, 128, 128);
+const mercuryMaterial = new THREE.MeshStandardMaterial({
+    map: mercuryTexture,
+    normalMap: mercuryBump
+});
+const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
+mercury.position.set(24, 0, 0);
+
+
+// Venus
+const venusTexture = new THREE.TextureLoader().load('/venus.jpg');
+const venusBump = new THREE.TextureLoader().load('/venus-normalmap.jpg');
+const venusGeometry = new THREE.SphereGeometry(3, 128, 128);
+const venusMaterial = new THREE.MeshStandardMaterial({
+    map: venusTexture,
+    normalMap: venusBump
+});
+const venus = new THREE.Mesh(venusGeometry, venusMaterial);
+venus.position.set(40, 0, 0)
 
 
 // Earth
@@ -129,10 +191,44 @@ const moon = new THREE.Mesh(moonGeometry, moonMaterial);
 moon.position.set(12, 0, 0)
 
 
+mercuryAnker.add(mercury);
 
-sunPointLight.add(earth)
-earthPointLight.add(moon)
-earth.add(moonTorus, earthPointLight)
+venusAnker.add(venus);
+
+earthAnker.add(earth);
+earth.add(moonTorus, moonAnker);
+
+moonAnker.add(moon);
+
+
+scene.add(
+    // sun & lighting
+    sun,
+    ambientLight,
+    mainPointLight,
+
+    // main ankers in the sun
+    mercuryAnker,
+    venusAnker,
+    earthAnker,
+
+    // colorful anker helpers
+    earthAnkerHelper,
+    moonAnkerHelper,
+    mercuryAnkerHelper,
+    venusAnkerHelper,
+
+    // all the toruses
+    earthTorus,
+    mercuryTorus,
+    venusTorus,
+    marsTorus,
+    jupiterTorus,
+    saturnTorus,
+    uranusTorus,
+    neptuneTorus,
+);
+
 
 
 
@@ -161,44 +257,32 @@ earth.add(moonTorus, earthPointLight)
 // scene.add(helper);
 
 
+const ambientLightCheckbox = document.querySelector('#checkbox-light-ambient');
+const pointLightCheckbox = document.querySelector('#checkbox-light-point');
+const gridLightCheckbox = document.querySelector('#checkbox-grid-helper')
 
-scene.add(
-    // gridHelper,
-    ambientLight,
-    sunPointLight,
-    lightHelper,
-    lightHelper2,
-    sun,
-    earthTorus,
-    mainPointLight,
-    mercuryTorus,
-    venusTorus,
-    // earth,
-    // moon,
-)
+function sceneObjControl(controller, obj) {
+    controller.addEventListener("change", function() {
+        if (this.checked) {
+            scene.add(obj);
+        } else {
+            scene.remove(obj);
+        }
+    });
+}
 
-const ambientLightCheckbox = document.querySelector('#checkbox-light-ambient')
-const pointLightCheckbox = document.querySelector('#checkbox-light-point')
-ambientLightCheckbox.addEventListener("change", function() {
-    if (this.checked) {
-        scene.add(ambientLight);
-    } else {
-        scene.remove(ambientLight);
-    }
-});
-pointLightCheckbox.addEventListener("change", function() {
-    if (this.checked) {
-        scene.add(mainPointLight);
-    } else {
-        scene.remove(mainPointLight);
-    }
-});
+sceneObjControl(ambientLightCheckbox, ambientLight);
+sceneObjControl(pointLightCheckbox, mainPointLight);
+sceneObjControl(gridLightCheckbox, gridHelper);
+
 
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+
 
 function animate() {
     requestAnimationFrame(animate);
@@ -208,24 +292,28 @@ function animate() {
     // sun.rotation.y += 0.002;
     // sun.rotation.y -= 0.002;
 
-    // console.log(camera.position)
 
     renderer.render(scene, camera);
 
 
     const checkbox = document.querySelector('#checkbox');
-    if (checkbox.checked != true) return;
+    if (!(checkbox.checked)) return;
 
 
-    earthPointLight.rotation.y += 0.01;
+    mercuryAnker.rotation.y += 0.0065;
+
+    venusAnker.rotation.y += 0.00375;
+
+    earthAnker.rotation.y += 0.002;
+    moonAnker.rotation.y += 0.01;
+
     moon.rotation.y -= 0.01;
-    sunPointLight.rotation.y += 0.002;
     earth.rotation.y -= 0.002;
 };
 
 function addStar() {
     const geometry = new THREE.SphereGeometry(0.4, 24, 24);
-    const material = new THREE.MeshStandardMaterial();
+    const material = new THREE.MeshBasicMaterial();
     const star = new THREE.Mesh(geometry, material);
 
     const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100) * 5)
@@ -235,7 +323,7 @@ function addStar() {
     scene.add(star)
 }
 
-Array(1000).fill().forEach(addStar)
+Array(1500).fill().forEach(addStar)
 
 
 const spaceTexture = new THREE.TextureLoader().load('/space2.jpg');
