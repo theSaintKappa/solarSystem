@@ -1,21 +1,30 @@
-import './style.css'
+import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 THREE.DefaultLoadingManager.onStart = function(url, itemsLoaded, itemsTotal) {
     console.log('Started loading file.');
-    // document.querySelector('body').style.display = 'none';
 };
+
+const progressContainer = document.querySelector('.progress-container');
+const currentText = document.querySelector('.current-text');
+const progressBar = document.querySelector('.progress-bar');
+const progressText = document.querySelector('.progress-text')
 
 THREE.DefaultLoadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
     console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+
+    progressBar.value = (itemsLoaded / itemsTotal) * 100;
+
+    currentText.innerText = `Loading asset: ${url} (${itemsLoaded}/${itemsTotal})`;
 };
 
 THREE.DefaultLoadingManager.onLoad = function() {
     console.log('Loading Complete!');
-    // document.querySelector('#canvas').style.opacity = 1;
-    // document.querySelector('body').style.display = 'block';
-    document.querySelector('#loader').style.opacity = 0;
+    progressText.innerText = "Loading Complete!";
+    progressContainer.style.opacity = '0';
+    // progressContainer.style.pointerEvents = 'none';
+    setTimeout(() => { progressContainer.remove(); }, 2350);
 };
 
 THREE.DefaultLoadingManager.onError = function(url) {
@@ -28,7 +37,7 @@ window.addEventListener("resize", onWindowResize, false);
 
 // scene, camera
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 30000);
 
 
 // renderer
@@ -45,6 +54,10 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 // orbit controls & grid
 const controls = new OrbitControls(camera, renderer.domElement);
 const gridHelper = new THREE.GridHelper(400, 500, 0xff0000, 0x7ea689);
+// controls.minDistance = 15;
+controls.maxDistance = 2000;
+controls.panSpeed = 1.2;
+controls.target = new THREE.Vector3(0, 0, 0);
 
 
 controls.addEventListener('end', function() {
@@ -56,6 +69,58 @@ controls.addEventListener('end', function() {
 // camera.position.setY(sessionStorage.getItem('camPosY'));
 // camera.position.setZ(sessionStorage.getItem('camPosZ'));
 camera.position.set(0, 34, 70);
+
+
+// const skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
+// const skybox = new THREE.Mesh(skyboxGeo);
+// scene.add(skybox);
+
+
+
+
+
+function createPathStrings(filename) {
+    const basePath = "/skybox/";
+    const baseFilename = basePath + filename;
+    const fileType = ".png";
+    const sides = ["1", "3", "5", "6", "2", "4"];
+    const pathStings = sides.map(side => {
+        return baseFilename + "_" + side + fileType;
+    });
+    return pathStings;
+}
+
+let skyboxImage = "nebula";
+
+function createMaterialArray(filename) {
+    const skyboxImagepaths = createPathStrings(filename);
+    const materialArray = skyboxImagepaths.map(image => {
+        let texture = new THREE.TextureLoader().load(image);
+
+        return new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide });
+    });
+    return materialArray;
+}
+
+const materialArray = createMaterialArray(skyboxImage);
+const skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
+const skybox = new THREE.Mesh(skyboxGeo, materialArray);
+scene.add(skybox);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
@@ -324,8 +389,8 @@ function addStar() {
 Array(1500).fill().forEach(addStar)
 
 
-const spaceTexture = new THREE.TextureLoader().load('/space2.jpg');
-scene.background = spaceTexture;
+// const spaceTexture = new THREE.TextureLoader().load('/space2.jpg');
+// scene.background = spaceTexture;
 
 
 
