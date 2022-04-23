@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset=UTF-8 />
+    <link rel="icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing ball</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+        
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            background: radial-gradient(#292929, #000000);
+            overflow: hidden;
+        }
+        
+        .progress-container {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background-color: black;
+            display: flex;
+            place-content: center;
+            align-items: center;
+            flex-direction: column;
+            user-select: none;
+            transition-delay: 1s;
+            transition-duration: 1s;
+        }
+        
+        .progress-container label {
+            color: white;
+            text-align: center;
+            font-size: 3.5em;
+        }
+        
+        .progress-bar {
+            height: 30px;
+            width: 15vw;
+            margin: 5px;
+        }
+        
+        .current-text {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-container">
+        <label for="progress-bar" class="progress-text">Loading...</label>
+        <progress name="progress-bar" class="progress-bar" value="0" max="100"></progress>
+        <span class="current-text"></span>
+    </div>
+
+    <script type="module" src="./ball.js"></script>
+</body>
+
+</html>

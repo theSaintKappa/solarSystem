@@ -1,3 +1,4 @@
+//main.js
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -32,7 +33,11 @@ THREE.DefaultLoadingManager.onError = function(url) {
 };
 
 
-window.addEventListener("resize", onWindowResize, false);
+window.addEventListener("resize", function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}, false);
 
 
 // scene, camera
@@ -56,7 +61,8 @@ const controls = new OrbitControls(camera, renderer.domElement);
 const gridHelper = new THREE.GridHelper(400, 500, 0xff0000, 0x7ea689);
 // controls.minDistance = 15;
 controls.maxDistance = 2000;
-controls.panSpeed = 1.2;
+controls.panSpeed = 1.1;
+controls.rotateSpeed = 0.9;
 controls.target = new THREE.Vector3(0, 0, 0);
 
 
@@ -106,20 +112,6 @@ const materialArray = createMaterialArray(skyboxImage);
 const skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
 const skybox = new THREE.Mesh(skyboxGeo, materialArray);
 scene.add(skybox);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ambient light
@@ -195,7 +187,7 @@ neptuneTorus.rotation.x = Math.PI / 2;
 
 
 // Sun
-const sunTexture = new THREE.TextureLoader().load('/sun.jpg');
+const sunTexture = new THREE.TextureLoader().load('/textures/sun.jpg');
 // const sunBump = new THREE.TextureLoader().load('earth-normalmap.jpg');
 const sunGeometry = new THREE.SphereGeometry(8, 64, 32)
 const sunMaterial = new THREE.MeshBasicMaterial({
@@ -207,8 +199,8 @@ sun.position.set(0, 0, 0)
 
 
 // Mercury
-const mercuryTexture = new THREE.TextureLoader().load('/mercury.jpg');
-const mercuryBump = new THREE.TextureLoader().load('/mercury-normalmap.jpg');
+const mercuryTexture = new THREE.TextureLoader().load('/textures/mercury.jpg');
+const mercuryBump = new THREE.TextureLoader().load('/textures/mercury-normalmap.jpg');
 const mercuryGeometry = new THREE.SphereGeometry(2.5, 128, 128);
 const mercuryMaterial = new THREE.MeshStandardMaterial({
     map: mercuryTexture,
@@ -219,8 +211,8 @@ mercury.position.set(24, 0, 0);
 
 
 // Venus
-const venusTexture = new THREE.TextureLoader().load('/venus.jpg');
-const venusBump = new THREE.TextureLoader().load('/venus-normalmap.jpg');
+const venusTexture = new THREE.TextureLoader().load('/textures/venus.jpg');
+const venusBump = new THREE.TextureLoader().load('/textures/venus-normalmap.jpg');
 const venusGeometry = new THREE.SphereGeometry(3, 128, 128);
 const venusMaterial = new THREE.MeshStandardMaterial({
     map: venusTexture,
@@ -231,8 +223,8 @@ venus.position.set(40, 0, 0)
 
 
 // Earth
-const earthTexture = new THREE.TextureLoader().load('/earth.jpg');
-const earthBump = new THREE.TextureLoader().load('/earth-normalmap.jpg');
+const earthTexture = new THREE.TextureLoader().load('/textures/earth.jpg');
+const earthBump = new THREE.TextureLoader().load('/textures/earth-normalmap.jpg');
 const earthGeometry = new THREE.SphereGeometry(4, 128, 128);
 const earthMaterial = new THREE.MeshStandardMaterial({
     map: earthTexture,
@@ -243,8 +235,8 @@ earth.position.set(56, 0, 0)
 
 
 // Moon
-const moonTexture = new THREE.TextureLoader().load('/moon.jpg');
-const moonBump = new THREE.TextureLoader().load('/moon-normalmap.jpg');
+const moonTexture = new THREE.TextureLoader().load('/textures/moon.jpg');
+const moonBump = new THREE.TextureLoader().load('/textures/moon-normalmap.jpg');
 const moonGeometry = new THREE.SphereGeometry(1.5, 128, 128);
 const moonMaterial = new THREE.MeshStandardMaterial({
     map: moonTexture,
@@ -338,14 +330,9 @@ sceneObjControl(ambientLightCheckbox, ambientLight);
 sceneObjControl(pointLightCheckbox, mainPointLight);
 sceneObjControl(gridLightCheckbox, gridHelper);
 
-
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-
+let orbitalSpeed = 8500;
+// lower number = planets faster
+// higher number = planets slower
 
 function animate() {
     requestAnimationFrame(animate);
@@ -363,30 +350,36 @@ function animate() {
     if (!(checkbox.checked)) return;
 
 
-    mercuryAnker.rotation.y += 0.0065;
+    // mercuryAnker.rotation.y += 0.0065;
+    mercuryAnker.rotation.y += 47.9 / orbitalSpeed;
 
-    venusAnker.rotation.y += 0.00375;
+    // venusAnker.rotation.y += 0.00375;
+    venusAnker.rotation.y += 35 / orbitalSpeed;
 
-    earthAnker.rotation.y += 0.002;
-    moonAnker.rotation.y += 0.01;
+    // earthAnker.rotation.y += 0.002;
+    earthAnker.rotation.y += 29.8 / orbitalSpeed;
+    // moonAnker.rotation.y += 0.01;
+    moonAnker.rotation.y += 61.3833 / orbitalSpeed;
 
-    moon.rotation.y -= 0.01;
-    earth.rotation.y -= 0.002;
+    // moon.rotation.y -= 61.3833 / orbitalSpeed;
+    // earth.rotation.y -= 29.8 / orbitalSpeed;
 };
 
 function addStar() {
-    const geometry = new THREE.SphereGeometry(0.4, 24, 24);
-    const material = new THREE.MeshBasicMaterial();
+    const geometry = new THREE.SphereGeometry(2, 4, 4);
+    // const material = new THREE.MeshNormalMaterial(); //kolorki
+    const material = new THREE.MeshBasicMaterial(); //nie potrzebuje oświetlenia
+    // const material = new THREE.MeshStandardMaterial(); //potrzebuje oświetlenie
     const star = new THREE.Mesh(geometry, material);
 
-    const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100) * 5)
+    const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(10000))
         // console.log("star: " + x, y, z)
 
     star.position.set(x, y, z)
     scene.add(star)
 }
 
-Array(1500).fill().forEach(addStar)
+Array(7500).fill().forEach(addStar)
 
 
 // const spaceTexture = new THREE.TextureLoader().load('/space2.jpg');
