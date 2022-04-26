@@ -8,6 +8,10 @@
     overflow: hidden;
 }
 
+body {
+    background-color: black;
+}
+
 .progress-container {
     position: absolute;
     width: 100vw;
@@ -17,7 +21,7 @@
     z-index: 1;
     background-color: black;
     display: flex;
-    place-content: center;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     user-select: none;
