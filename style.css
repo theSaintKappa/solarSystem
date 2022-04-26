@@ -95,3 +95,15 @@
     transform: scale(1.5);
     margin-left: 5px;
 }
+
+.toggle select {
+    height: 25px;
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: -8px;
+    transform: translateY(-2px)
+}
+
+.toggle select option {
+    font-weight: bold;
+}

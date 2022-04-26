@@ -28,7 +28,7 @@ THREE.DefaultLoadingManager.onLoad = function() {
     progressText.innerText = "Loading Complete!";
     progressContainer.style.opacity = '0';
     // progressContainer.style.pointerEvents = 'none';
-    setTimeout(() => { progressContainer.remove(); }, 2350);
+    setTimeout(() => { progressContainer.remove(); }, 2050);
 };
 
 THREE.DefaultLoadingManager.onError = function(url) {
@@ -41,16 +41,16 @@ const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.25;
+renderer.toneMappingExposure = 1;
+renderer.outputEncoding = THREE.sRGBEncoding;
 
-const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 0, 500);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.5;
+controls.autoRotateSpeed = 0.75;
 controls.enableDamping = true;
 
 const pointlight = new THREE.PointLight(0xffffff, 1);
@@ -65,7 +65,10 @@ window.addEventListener("resize", function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }, false);
 
-new RGBELoader().setPath('/').load('cayley_interior_4k.hdr', function(hdrmap) {
+// const hdrTexture = 'cayley_interior_4k.hdr';
+const hdrTexture = 'kiara_1_dawn_4k.hdr';
+
+new RGBELoader().setPath('/').load(hdrTexture, function(hdrmap) {
 
     let envmap = envmaploader.fromCubemap(hdrmap);
     let texture = new THREE.CanvasTexture(new FlakesTexture());
@@ -89,6 +92,10 @@ new RGBELoader().setPath('/').load('cayley_interior_4k.hdr', function(hdrmap) {
     let ballMat = new THREE.MeshPhysicalMaterial(ballMaterial);
     let ballMesh = new THREE.Mesh(ballGeo, ballMat);
     scene.add(ballMesh);
+
+    hdrmap.mapping = THREE.EquirectangularReflectionMapping;
+    scene.background = hdrmap;
+    scene.environment = hdrmap
 
     animate();
 
