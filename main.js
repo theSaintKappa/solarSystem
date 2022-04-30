@@ -172,7 +172,6 @@ const neptuneTorus = new THREE.Mesh(neptuneTorusGeometry, neptuneTorusMaterial);
 neptuneTorus.rotation.x = Math.PI / 2;
 
 
-
 // Sun
 const sunTexture = new THREE.TextureLoader().load('/textures/sun.jpg');
 // const sunBump = new THREE.TextureLoader().load('earth-normalmap.jpg');
@@ -215,9 +214,17 @@ venus.rotateZ(Math.PI / 2)
 const earthTexture = new THREE.TextureLoader().load('/textures/earth.jpg');
 const earthBump = new THREE.TextureLoader().load('/textures/earth-normalmap.jpg');
 const earthGeometry = new THREE.SphereGeometry(4, 128, 128);
-const earthMaterial = new THREE.MeshStandardMaterial({
+// const earthMaterial = new THREE.MeshStandardMaterial({
+//     map: earthTexture,
+//     // normalMap: earthBump
+// });
+const earthMaterial = new THREE.MeshPhongMaterial({
+    specular: 0x333333,
+    shininess: 5,
     map: earthTexture,
-    // normalMap: earthBump
+    specularMap: new THREE.TextureLoader().load('/textures/earth-specular.jpg'),
+    // normalMap: earthBump,
+    // normalScale: new THREE.Vector2(0.85, 0.85)
 });
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 earth.position.set(0, 56, 0);
@@ -383,11 +390,33 @@ function sceneObjControl(controller, obj) {
             scene.remove(obj);
         }
     });
-}
+};
 
 sceneObjControl(ambientLightCheckbox, ambientLight);
 sceneObjControl(pointLightCheckbox, mainPointLight);
 sceneObjControl(gridLightCheckbox, gridHelper);
+
+
+
+const planets = ["mercury", "venus", "earth", "moon", "mars", "jupiter", "saturn", "uranus", "neptune"];
+
+planets.forEach(planet => planetHover(planet));
+
+function planetHover(planet) {
+    const torusMat = eval(planet + "TorusMaterial");
+    const elementId = document.querySelector(`#${planet}`);
+
+    elementId.addEventListener("mouseover", function() {
+        // torusMat.color.setHex(0x00ff9d);
+        torusMat.color.setHex(0x99ff00);
+    });
+    elementId.addEventListener("mouseout", function() {
+        torusMat.color.setHex(0xffffff);
+    });
+}
+
+
+
 
 let orbitalSpeed = 8000;
 // lower number = planets faster

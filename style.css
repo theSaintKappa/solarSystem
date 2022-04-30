@@ -54,7 +54,6 @@ body {
 
 .container {
     position: absolute;
-    bottom: 0;
     backdrop-filter: blur(16px);
     padding: 1rem;
     outline: 2px solid white;
@@ -69,9 +68,10 @@ body {
 }
 
 .author {
+    bottom: 0;
     pointer-events: none;
     left: 0;
-    border-radius: 0 5px 0 0;
+    border-radius: 0 .5em 0 0;
 }
 
 .author span,
@@ -86,8 +86,9 @@ body {
 }
 
 .toggle {
+    bottom: 0;
     right: 0;
-    border-radius: 5px 0 0 0;
+    border-radius: .5em 0 0 0;
     text-align: end;
     cursor: pointer;
     user-select: none;
@@ -110,4 +111,27 @@ body {
 
 .toggle select option {
     font-weight: bold;
+}
+
+.planets {
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: .8em;
+    border-radius: 0 0 .5em 0;
+    padding: 0;
+}
+
+.planets span {
+    color: white;
+    letter-spacing: 1px;
+    font-family: monospace;
+    cursor: help;
+    padding: 3px 8px 3px 4px;
+}
+
+.planets span:hover {
+    background-color: white;
+    color: black;
 }
