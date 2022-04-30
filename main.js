@@ -127,46 +127,46 @@ const neptuneAnker = new THREE.ArrowHelper(arrowDir, arrowOrigin, 1, 0x9000ff); 
 
 
 
-const mercuryTorusGeometry = new THREE.TorusGeometry(24, 0.1, 10, 100);
+const mercuryTorusGeometry = new THREE.TorusGeometry(24, 0.1, 10, 150);
 const mercuryTorusMaterial = new THREE.MeshBasicMaterial();
 const mercuryTorus = new THREE.Mesh(mercuryTorusGeometry, mercuryTorusMaterial);
 mercuryTorus.rotation.x = Math.PI / 2;
 
-const venusTorusGeometry = new THREE.TorusGeometry(40, 0.1, 10, 100);
+const venusTorusGeometry = new THREE.TorusGeometry(40, 0.1, 10, 150);
 const venusTorusMaterial = new THREE.MeshBasicMaterial();
 const venusTorus = new THREE.Mesh(venusTorusGeometry, venusTorusMaterial);
 venusTorus.rotation.x = Math.PI / 2;
 
-const earthTorusGeometry = new THREE.TorusGeometry(56, 0.1, 10, 100);
+const earthTorusGeometry = new THREE.TorusGeometry(56, 0.1, 10, 200);
 const earthTorusMaterial = new THREE.MeshBasicMaterial();
 const earthTorus = new THREE.Mesh(earthTorusGeometry, earthTorusMaterial);
 earthTorus.rotation.x = Math.PI / 2;
-const moonTorusGeometry = new THREE.TorusGeometry(12, 0.1, 10, 100);
+const moonTorusGeometry = new THREE.TorusGeometry(9, 0.1, 10, 100);
 const moonTorusMaterial = new THREE.MeshBasicMaterial();
 const moonTorus = new THREE.Mesh(moonTorusGeometry, moonTorusMaterial);
 moonTorus.rotation.x = Math.PI / 2;
 
-const marsTorusGeometry = new THREE.TorusGeometry(72, 0.1, 10, 100);
+const marsTorusGeometry = new THREE.TorusGeometry(72, 0.1, 10, 200);
 const marsTorusMaterial = new THREE.MeshBasicMaterial();
 const marsTorus = new THREE.Mesh(marsTorusGeometry, marsTorusMaterial);
 marsTorus.rotation.x = Math.PI / 2;
 
-const jupiterTorusGeometry = new THREE.TorusGeometry(88, 0.1, 10, 100);
+const jupiterTorusGeometry = new THREE.TorusGeometry(88, 0.1, 10, 200);
 const jupiterTorusMaterial = new THREE.MeshBasicMaterial();
 const jupiterTorus = new THREE.Mesh(jupiterTorusGeometry, jupiterTorusMaterial);
 jupiterTorus.rotation.x = Math.PI / 2;
 
-const saturnTorusGeometry = new THREE.TorusGeometry(104, 0.1, 10, 100);
+const saturnTorusGeometry = new THREE.TorusGeometry(104, 0.1, 10, 200);
 const saturnTorusMaterial = new THREE.MeshBasicMaterial();
 const saturnTorus = new THREE.Mesh(saturnTorusGeometry, saturnTorusMaterial);
 saturnTorus.rotation.x = Math.PI / 2;
 
-const uranusTorusGeometry = new THREE.TorusGeometry(120, 0.1, 10, 100);
+const uranusTorusGeometry = new THREE.TorusGeometry(120, 0.1, 10, 250);
 const uranusTorusMaterial = new THREE.MeshBasicMaterial();
 const uranusTorus = new THREE.Mesh(uranusTorusGeometry, uranusTorusMaterial);
 uranusTorus.rotation.x = Math.PI / 2;
 
-const neptuneTorusGeometry = new THREE.TorusGeometry(136, 0.1, 10, 100);
+const neptuneTorusGeometry = new THREE.TorusGeometry(136, 0.1, 10, 250);
 const neptuneTorusMaterial = new THREE.MeshBasicMaterial();
 const neptuneTorus = new THREE.Mesh(neptuneTorusGeometry, neptuneTorusMaterial);
 neptuneTorus.rotation.x = Math.PI / 2;
@@ -240,7 +240,7 @@ const moonMaterial = new THREE.MeshStandardMaterial({
     // normalMap: moonBump
 });
 const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-moon.position.set(0, 12, 0);
+moon.position.set(0, 9, 0);
 moon.rotateZ(Math.PI / 2);
 
 
@@ -280,7 +280,24 @@ const saturnMaterial = new THREE.MeshStandardMaterial({
 });
 const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
 saturn.position.set(0, 104, 0);
-saturn.rotateZ(Math.PI / 2);
+saturn.rotateZ(Math.PI / 2 + 0.3);
+saturn.rotateX(0.1);
+
+
+const saturnRingTexture = new THREE.TextureLoader().load('/textures/saturn-ring.jpg');
+const saturnRingGeometry = new THREE.RingGeometry(9.5, 6.5, 32);
+const saturnRingMaterial = new THREE.MeshStandardMaterial({
+    map: saturnRingTexture,
+    transparent: false,
+    alphaMap: new THREE.TextureLoader().load('/textures/saturn-ring-alpha.gif')
+});
+const saturnRing = new THREE.Mesh(saturnRingGeometry, saturnRingMaterial);
+saturn.add(saturnRing);
+saturnRing.rotateX(Math.PI / 2);
+
+
+
+
 
 
 // Uranus
@@ -464,18 +481,11 @@ function addStar() {
     const star = new THREE.Mesh(geometry, material);
 
     const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(10000))
-        // console.log("star: " + x, y, z)
 
     star.position.set(x, y, z)
     scene.add(star)
 }
 
 Array(7500).fill().forEach(addStar)
-
-
-// const spaceTexture = new THREE.TextureLoader().load('/space2.jpg');
-// scene.background = spaceTexture;
-
-
 
 animate();

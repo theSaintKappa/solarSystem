@@ -129,9 +129,27 @@ body {
     font-family: monospace;
     cursor: help;
     padding: 3px 8px 3px 4px;
+    transition: color 100ms;
+    position: relative;
 }
 
 .planets span:hover {
-    background-color: white;
     color: black;
+    font-weight: bold;
+}
+
+.planets span::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0;
+    left: 0;
+    transition: 200ms;
+    background-color: #99ff00;
+    z-index: -1;
+}
+
+.planets span:hover::before {
+    width: 100%;
 }
