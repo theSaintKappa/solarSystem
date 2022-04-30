@@ -5,8 +5,7 @@ module.exports = defineConfig({
     build: {
         rollupOptions: {
             input: {
-                main: resolve(__dirname, 'en/index.html'),
-                main: resolve(__dirname, 'pl/index.html'),
+                main: resolve(__dirname, 'index.html'),
                 nested: resolve(__dirname, 'glowingball/index.html')
             }
         }

@@ -68,7 +68,7 @@ window.addEventListener("resize", function onWindowResize() {
 // const hdrTexture = 'cayley_interior_4k.hdr';
 const hdrTexture = 'kiara_1_dawn_4k.hdr';
 
-new RGBELoader().setPath('/').load(hdrTexture, function(hdrmap) {
+new RGBELoader().setPath('/glowingball/').load(hdrTexture, function(hdrmap) {
 
     let envmap = envmaploader.fromCubemap(hdrmap);
     let texture = new THREE.CanvasTexture(new FlakesTexture());
