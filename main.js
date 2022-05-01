@@ -3,7 +3,20 @@ import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-
+// Firefox support 😎
+if (navigator.userAgent.match(/firefox|fxios/i)) {
+    document.body.innerHTML = '';
+    document.body.style.minHeight = "100vh";
+    document.body.style.display = "flex";
+    document.body.style.alignItems = "center";
+    document.body.style.justifyContent = "center";
+    document.body.style.flexDirection = "column";
+    document.body.innerHTML = '<iframe id="reddit-embed" src="https://www.redditmedia.com/r/ProgrammerHumor/comments/r6ay5j/relationshipstatus_complicated/?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" scrolling="no" width="640" height="420"></iframe>';
+    document.body.appendChild(document.createElement("h1"));
+    document.querySelector('h1').innerHTML = "I will add firefox support soon&trade;";
+    document.querySelector('h1').style.color = "white";
+    document.querySelector('h1').style.marginTop = "35px";
+};
 
 
 window.addEventListener("resize", function onWindowResize() {
