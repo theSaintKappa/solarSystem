@@ -16,6 +16,7 @@ if (navigator.userAgent.match(/firefox|fxios/i)) {
     document.querySelector('h1').innerHTML = "I will add firefox support soon&trade;";
     document.querySelector('h1').style.color = "white";
     document.querySelector('h1').style.marginTop = "35px";
+    throw new Error("I hate firefox");
 };
 
 
