@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8" />
@@ -8,53 +8,53 @@
     <link rel="alternate" hreflang="en" href="https://www.threesolarsystem.netlify.app">
     <link rel="alternate" hreflang="pl" href="https://www.threesolarsystem.netlify.app/pl">
     <link rel="alternate" hreflang="ja" href="https://www.threesolarsystem.netlify.app/jp">
-    <title>Solar System</title>
+    <title>Układ Słoneczny</title>
 </head>
 
 <body>
     <div class="progress-container">
-        <label for="progress-bar" class="progress-text">Loading...</label>
+        <label for="progress-bar" class="progress-text">Ładowanie...</label>
         <progress name="progress-bar" class="progress-bar" value="0" max="100"></progress>
         <span class="current-text"></span>
     </div>
-    <script type="module" src="/loading/loadingen.js"></script>
+    <script type="module" src="/loading/loadingpl.js"></script>
 
     <canvas id="canvas"></canvas>
 
-    <div class="container author"><span>Made by Wojtek Zrałek | All rights reserved &copy;</span></div>
+    <div class="container author"><span>Aplikację wykonał Wojtek Zrałek | Wszelkie prawa zastrzeżone &copy;</span></div>
 
     <div class="container toggle">
         <label for="sbox">Skybox: </label>
         <select name="sbox" id="skybox-select">
-            <option value="1">Blue</option>
-            <option value="2">Simple</option>
-            <option value="3">Nebula</option>
-            <option value="4">Red</option>
+            <option value="1">Niebieski</option>
+            <option value="2">Prosty</option>
+            <option value="3">Mgławica</option>
+            <option value="4">Czerwony</option>
         </select><br>
 
-        <label for="checkbox">Animation: </label>
+        <label for="checkbox">Animacje: </label>
         <input type="checkbox" checked="checked" id="checkbox" name="checkbox"><br>
 
-        <label for="checkbox-light-ambient">ambientLight: </label>
+        <label for="checkbox-light-ambient">Światło otoczenia: </label>
         <input type="checkbox" checked="checked" id="checkbox-light-ambient" name="checkbox-light-ambient"><br>
 
-        <label for="checkbox-light-point">pointLight: </label>
+        <label for="checkbox-light-point">Światło punktowe: </label>
         <input type="checkbox" checked="checked" id="checkbox-light-point" name="checkbox-light-point"><br>
 
-        <label for="checkbox-grid-helper">gridHelperPlane: </label>
+        <label for="checkbox-grid-helper">Siatka powierzchni: </label>
         <input type="checkbox" id="checkbox-grid-helper" name="checkbox-grid-helper"><br>
     </div>
 
     <div class="container planets">
-        <span id="mercury">mercury</span>
-        <span id="venus">venus</span>
-        <span id="earth">earth</span>
-        <span id="moon">moon</span>
-        <span id="mars">mars</span>
-        <span id="jupiter">jupiter</span>
-        <span id="saturn">saturn</span>
-        <span id="uranus">uranus</span>
-        <span id="neptune">neptune</span>
+        <span id="mercury">Merkury</span>
+        <span id="venus">Wenus</span>
+        <span id="earth">Ziemia</span>
+        <span id="moon">Księżyc</span>
+        <span id="mars">Mars</span>
+        <span id="jupiter">Jowisz</span>
+        <span id="saturn">Saturn</span>
+        <span id="uranus">Uran</span>
+        <span id="neptune">Neptun</span>
     </div>
 
     <script type="module" src="/main.js"></script>
