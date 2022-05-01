@@ -1,4 +1,19 @@
 [[redirects]]
-  from = "/*"
-  to = "/404/index.html"
-  status = 404
+  from = "/"
+  to = "/jp"
+  status = 302
+  force = true
+  conditions = {Language = ["ja"]}
+
+[[redirects]]
+  from = "/"
+  to = "/pl"
+  status = 302
+  force = true
+  conditions = {Language = ["pl"]}
+
+[[redirects]]
+  from = "/en"
+  to = "/index.html"
+  status = 200
+  force = true
