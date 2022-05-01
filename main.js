@@ -83,8 +83,14 @@ changeSkybox(1);
 
 
 document.querySelector('#skybox-select').addEventListener("change", function() {
-    scene.background = null;
-    changeSkybox(this.value);
+    // changeSkybox(this.value);
+    console.error(this.value);
+
+    if ((this.value) != "none") {
+        changeSkybox(this.value);
+    } else {
+        scene.background = null;
+    }
 });
 
 
