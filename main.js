@@ -53,7 +53,7 @@ controls.rotateSpeed = 0.9;
 controls.autoRotateSpeed = 0.75;
 
 camera.position.set(0, 40, 85);
-controls.target.set(1, 1, 1);
+controls.target.set(0, 0, 0);
 
 document.querySelector('#checkbox-auto-rotate').addEventListener('change', function() {
     if (this.checked) {
