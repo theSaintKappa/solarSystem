@@ -50,7 +50,28 @@ const gridHelper = new THREE.GridHelper(400, 500, 0xff0000, 0x7ea689);
 controls.maxDistance = 2000;
 controls.panSpeed = 1.1;
 controls.rotateSpeed = 0.9;
-controls.target = new THREE.Vector3(0, 0, 0);
+controls.autoRotateSpeed = 0.75;
+
+camera.position.set(0, 40, 85);
+controls.target.set(1, 1, 1);
+
+document.querySelector('#checkbox-auto-rotate').addEventListener('change', function() {
+    if (this.checked) {
+        controls.autoRotate = true;
+        controls.target.set(0, 0, 0);
+    } else {
+        controls.autoRotate = false;
+    }
+});
+
+controls.enableDamping = true;
+document.querySelector('#checkbox-camera-damping').addEventListener('change', function() {
+    if (this.checked) {
+        controls.enableDamping = true;
+    } else {
+        controls.enableDamping = false;
+    }
+})
 
 
 controls.addEventListener('end', function() {
@@ -58,7 +79,6 @@ controls.addEventListener('end', function() {
     sessionStorage.setItem('camPosY', camera.position.y);
     sessionStorage.setItem('camPosZ', camera.position.z);
 });
-camera.position.set(0, 34, 70);
 
 
 // ft - posX
