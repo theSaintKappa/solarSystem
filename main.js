@@ -58,8 +58,10 @@ controls.target.set(0, 0, 0);
 document.querySelector('#checkbox-auto-rotate').addEventListener('change', function() {
     if (this.checked) {
         controls.autoRotate = true;
+        controls.enablePan = false;
         controls.target.set(0, 0, 0);
     } else {
+        controls.enablePan = true;
         controls.autoRotate = false;
     }
 });
