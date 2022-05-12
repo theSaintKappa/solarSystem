@@ -69,9 +69,13 @@ body {
 
 .author {
     bottom: 0;
-    pointer-events: none;
+    /* pointer-events: none; */
     left: 0;
     border-radius: 0 .5em 0 0;
+}
+
+.author span a:visited {
+    color: #0022ff;
 }
 
 .author span,

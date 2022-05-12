@@ -303,7 +303,7 @@ const saturnRingTexture = new THREE.TextureLoader().load('/textures/saturn-ring.
 const saturnRingGeometry = new THREE.RingGeometry(9.5, 6.5, 32);
 const saturnRingMaterial = new THREE.MeshStandardMaterial({
     map: saturnRingTexture,
-    transparent: false,
+    transparent: true,
     alphaMap: new THREE.TextureLoader().load('/textures/saturn-ring-alpha.gif')
 });
 const saturnRing = new THREE.Mesh(saturnRingGeometry, saturnRingMaterial);
