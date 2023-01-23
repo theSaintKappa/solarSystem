@@ -106,47 +106,47 @@ const uranusAnker = new THREE.ArrowHelper(arrowDir, arrowOrigin, 1, 0xf700ff); /
 const neptuneAnker = new THREE.ArrowHelper(arrowDir, arrowOrigin, 1, 0x9000ff); //purple
 
 const mercuryTorusGeometry = new THREE.TorusGeometry(24, 0.1, 10, 150);
-const mercuryTorusMaterial = new THREE.MeshBasicMaterial();
-const mercuryTorus = new THREE.Mesh(mercuryTorusGeometry, mercuryTorusMaterial);
+window.mercuryTorusMaterial = new THREE.MeshBasicMaterial();
+const mercuryTorus = new THREE.Mesh(mercuryTorusGeometry, window.mercuryTorusMaterial);
 mercuryTorus.rotation.x = Math.PI / 2;
 
 const venusTorusGeometry = new THREE.TorusGeometry(40, 0.1, 10, 150);
-const venusTorusMaterial = new THREE.MeshBasicMaterial();
-const venusTorus = new THREE.Mesh(venusTorusGeometry, venusTorusMaterial);
+window.venusTorusMaterial = new THREE.MeshBasicMaterial();
+const venusTorus = new THREE.Mesh(venusTorusGeometry, window.venusTorusMaterial);
 venusTorus.rotation.x = Math.PI / 2;
 
 const earthTorusGeometry = new THREE.TorusGeometry(56, 0.1, 10, 200);
-const earthTorusMaterial = new THREE.MeshBasicMaterial();
-const earthTorus = new THREE.Mesh(earthTorusGeometry, earthTorusMaterial);
+window.earthTorusMaterial = new THREE.MeshBasicMaterial();
+const earthTorus = new THREE.Mesh(earthTorusGeometry, window.earthTorusMaterial);
 earthTorus.rotation.x = Math.PI / 2;
 const moonTorusGeometry = new THREE.TorusGeometry(9, 0.1, 10, 100);
-const moonTorusMaterial = new THREE.MeshBasicMaterial();
-const moonTorus = new THREE.Mesh(moonTorusGeometry, moonTorusMaterial);
+window.moonTorusMaterial = new THREE.MeshBasicMaterial();
+const moonTorus = new THREE.Mesh(moonTorusGeometry, window.moonTorusMaterial);
 moonTorus.rotation.x = Math.PI / 2;
 
 const marsTorusGeometry = new THREE.TorusGeometry(72, 0.1, 10, 200);
-const marsTorusMaterial = new THREE.MeshBasicMaterial();
-const marsTorus = new THREE.Mesh(marsTorusGeometry, marsTorusMaterial);
+window.marsTorusMaterial = new THREE.MeshBasicMaterial();
+const marsTorus = new THREE.Mesh(marsTorusGeometry, window.marsTorusMaterial);
 marsTorus.rotation.x = Math.PI / 2;
 
 const jupiterTorusGeometry = new THREE.TorusGeometry(88, 0.1, 10, 200);
-const jupiterTorusMaterial = new THREE.MeshBasicMaterial();
-const jupiterTorus = new THREE.Mesh(jupiterTorusGeometry, jupiterTorusMaterial);
+window.jupiterTorusMaterial = new THREE.MeshBasicMaterial();
+const jupiterTorus = new THREE.Mesh(jupiterTorusGeometry, window.jupiterTorusMaterial);
 jupiterTorus.rotation.x = Math.PI / 2;
 
 const saturnTorusGeometry = new THREE.TorusGeometry(104, 0.1, 10, 200);
-const saturnTorusMaterial = new THREE.MeshBasicMaterial();
-const saturnTorus = new THREE.Mesh(saturnTorusGeometry, saturnTorusMaterial);
+window.saturnTorusMaterial = new THREE.MeshBasicMaterial();
+const saturnTorus = new THREE.Mesh(saturnTorusGeometry, window.saturnTorusMaterial);
 saturnTorus.rotation.x = Math.PI / 2;
 
 const uranusTorusGeometry = new THREE.TorusGeometry(120, 0.1, 10, 250);
-const uranusTorusMaterial = new THREE.MeshBasicMaterial();
-const uranusTorus = new THREE.Mesh(uranusTorusGeometry, uranusTorusMaterial);
+window.uranusTorusMaterial = new THREE.MeshBasicMaterial();
+const uranusTorus = new THREE.Mesh(uranusTorusGeometry, window.uranusTorusMaterial);
 uranusTorus.rotation.x = Math.PI / 2;
 
 const neptuneTorusGeometry = new THREE.TorusGeometry(136, 0.1, 10, 250);
-const neptuneTorusMaterial = new THREE.MeshBasicMaterial();
-const neptuneTorus = new THREE.Mesh(neptuneTorusGeometry, neptuneTorusMaterial);
+window.neptuneTorusMaterial = new THREE.MeshBasicMaterial();
+const neptuneTorus = new THREE.Mesh(neptuneTorusGeometry, window.neptuneTorusMaterial);
 neptuneTorus.rotation.x = Math.PI / 2;
 
 // const particlesGeometry = new THREE.BufferGeometry();
@@ -409,23 +409,13 @@ sceneObjControl(ambientLightCheckbox, ambientLight);
 sceneObjControl(pointLightCheckbox, mainPointLight);
 sceneObjControl(gridLightCheckbox, gridHelper);
 
-const planets = ['mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
+var test1 = 1;
+for (const planet of ['mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']) {
+    const material = window[`${planet}TorusMaterial`];
+    const element = document.querySelector(`[data-${planet}]`);
 
-planets.forEach((planet) => planetHover(planet));
-
-function planetHover(planet) {
-    const torusMat = eval(planet + 'TorusMaterial');
-    // Dear future me
-    // Please forgive me
-    // I can't express how sorry I am
-    const elementId = document.querySelector(`#${planet}`);
-
-    elementId.addEventListener('mouseover', function () {
-        torusMat.color.setHex(0x99ff00);
-    });
-    elementId.addEventListener('mouseout', function () {
-        torusMat.color.setHex(0xffffff);
-    });
+    element.onmouseover = () => material.color.setHex(0x99ff00);
+    element.onmouseout = () => material.color.setHex(0xffffff);
 }
 
 let orbitalSpeed = 8000;

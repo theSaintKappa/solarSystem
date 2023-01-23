@@ -6,7 +6,7 @@ const progressBar = document.querySelector('.progress-bar');
 const progressText = document.querySelector('.progress-text');
 
 THREE.DefaultLoadingManager.onStart = () => {
-    console.log('Started loading the file.');
+    console.log('Started loading files.');
 };
 
 THREE.DefaultLoadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
