@@ -35,7 +35,7 @@ controls.autoRotateSpeed = 0.75;
 camera.position.set(0, 40, 85);
 controls.target.set(0, 0, 0);
 
-document.querySelector('#auto-rotate').addEventListener('change', function () {
+document.querySelector('[data-auto-rotate]').addEventListener('change', function () {
     if (this.checked) {
         controls.autoRotate = true;
         controls.enablePan = false;
@@ -47,12 +47,17 @@ document.querySelector('#auto-rotate').addEventListener('change', function () {
 });
 
 controls.enableDamping = true;
-document.querySelector('#camera-damping').addEventListener('change', function () {
+document.querySelector('[data-camera-damping]').addEventListener('change', function () {
     if (this.checked) {
         controls.enableDamping = true;
     } else {
         controls.enableDamping = false;
     }
+});
+
+document.querySelector('[data-camera-reset]').addEventListener('click', function () {
+    camera.position.set(0, 40, 85);
+    controls.target.set(0, 0, 0);
 });
 
 controls.addEventListener('end', function () {
@@ -73,7 +78,7 @@ function changeSkybox(skyboxName) {
 }
 changeSkybox(1);
 
-document.querySelector('#skybox').addEventListener('change', (e) => {
+document.querySelector('[data-skybox]').addEventListener('change', (e) => {
     if (e.target.value != 'none') {
         changeSkybox(e.target.value);
     } else {
@@ -386,9 +391,9 @@ scene.add(
 // const helper = new THREE.PlaneHelper(plane, 1, 0xffff00);
 // scene.add(helper);
 
-const ambientLightCheckbox = document.querySelector('#ambient-light');
-const pointLightCheckbox = document.querySelector('#point-light');
-const gridLightCheckbox = document.querySelector('#grid-plane');
+const ambientLightCheckbox = document.querySelector('[data-ambient-light]');
+const pointLightCheckbox = document.querySelector('[data-point-light]');
+const gridLightCheckbox = document.querySelector('[data-grid-plane]');
 
 function sceneObjControl(controller, obj) {
     controller.addEventListener('change', function () {
@@ -437,7 +442,7 @@ function animate() {
 
     renderer.render(scene, camera);
 
-    const checkbox = document.querySelector('#animate');
+    const checkbox = document.querySelector('[data-animate]');
     if (!checkbox.checked) return;
 
     mercuryAnker.rotation.y += 47.9 / orbitalSpeed;

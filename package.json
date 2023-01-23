@@ -5,6 +5,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+        "deploy": "vite build && netlify deploy",
+        "deploy-prod": "vite build && netlify deploy --prod",
         "preview": "vite preview"
     },
     "devDependencies": {

@@ -20,15 +20,15 @@
         </div>
 
         <div class="menu settings">
-            <label>animation: <input type="checkbox" checked="checked" id="animate" /></label>
-            <label>ambient light: <input type="checkbox" checked="checked" id="ambient-light" /></label>
-            <label>point light: <input type="checkbox" checked="checked" id="point-light" /></label>
-            <label>grid plane: <input type="checkbox" id="grid-plane" /></label>
-            <label>camera auto rotate: <input type="checkbox" id="auto-rotate" /></label>
-            <label>camera damping: <input type="checkbox" checked="checked" id="camera-damping" /></label>
+            <label>animation: <input type="checkbox" checked data-animate /></label>
+            <label>ambient light: <input type="checkbox" checked data-ambient-light /></label>
+            <label>point light: <input type="checkbox" checked data-point-light /></label>
+            <label>grid plane: <input type="checkbox" data-grid-plane /></label>
+            <label>camera auto rotate: <input type="checkbox" data-auto-rotate /></label>
+            <label>camera damping: <input type="checkbox" checked data-camera-damping /></label>
             <label>
                 skybox:
-                <select id="skybox">
+                <select data-skybox>
                     <option value="1">Blue</option>
                     <option value="2">Simple</option>
                     <option value="3">Nebula</option>
@@ -36,6 +36,7 @@
                     <option value="none">None</option>
                 </select>
             </label>
+            <button data-camera-reset>Reset camera</button>
         </div>
 
         <div class="menu planets">
