@@ -1,70 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
+        <script defer src="./loading.js" type="module"></script>
+        <script defer src="./main.js" type="module"></script>
+        <title>SaintKappa's Solar System model</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="alternate" hreflang="en" href="https://www.threesolarsystem.netlify.app">
-    <link rel="alternate" hreflang="pl" href="https://www.threesolarsystem.netlify.app/pl">
-    <link rel="alternate" hreflang="ja" href="https://www.threesolarsystem.netlify.app/jp">
-    <title>Solar System</title>
-</head>
+    <body>
+        <div class="progress-container">
+            <h1 class="progress-text">Loading...</h1>
+            <progress class="progress-bar" value="0" max="100"></progress>
+            <p class="current-text"></p>
+        </div>
 
-<body>
-    <div class="progress-container">
-        <label for="progress-bar" class="progress-text">Loading...</label>
-        <progress name="progress-bar" class="progress-bar" value="0" max="100"></progress>
-        <span class="current-text"></span>
-    </div>
-    <script type="module" src="/loading/loadingen.js"></script>
+        <div class="menu settings">
+            <label>animation: <input type="checkbox" checked="checked" id="animate" /></label>
+            <label>ambient light: <input type="checkbox" checked="checked" id="ambient-light" /></label>
+            <label>point light: <input type="checkbox" checked="checked" id="point-light" /></label>
+            <label>grid plane: <input type="checkbox" id="grid-plane" /></label>
+            <label>camera auto rotate: <input type="checkbox" id="auto-rotate" /></label>
+            <label>camera damping: <input type="checkbox" checked="checked" id="camera-damping" /></label>
+            <label>
+                skybox:
+                <select id="skybox">
+                    <option value="1">Blue</option>
+                    <option value="2">Simple</option>
+                    <option value="3">Nebula</option>
+                    <option value="4">Red</option>
+                    <option value="none">None</option>
+                </select>
+            </label>
+        </div>
 
-    <canvas id="canvas"></canvas>
+        <div class="menu planets">
+            <span id="mercury">mercury</span>
+            <span id="venus">venus</span>
+            <span id="earth">earth</span>
+            <span id="moon">moon</span>
+            <span id="mars">mars</span>
+            <span id="jupiter">jupiter</span>
+            <span id="saturn">saturn</span>
+            <span id="uranus">uranus</span>
+            <span id="neptune">neptune</span>
+        </div>
 
-    <div class="container author"><span>Copyright under the <a href="./LICENSE/index.html" target="_blank">MIT LICENSE</a></span></div>
-
-    <div class="container toggle">
-        <label for="sbox">Skybox: </label>
-        <select name="sbox" id="skybox-select">
-            <option value="1">Blue</option>
-            <option value="2">Simple</option>
-            <option value="3">Nebula</option>
-            <option value="4">Red</option>
-            <option value="none">None</option>
-        </select><br>
-
-        <label for="checkbox">Animation: </label>
-        <input type="checkbox" checked="checked" id="checkbox" name="checkbox"><br>
-
-        <label for="checkbox-light-ambient">ambientLight: </label>
-        <input type="checkbox" checked="checked" id="checkbox-light-ambient" name="checkbox-light-ambient"><br>
-
-        <label for="checkbox-light-point">pointLight: </label>
-        <input type="checkbox" checked="checked" id="checkbox-light-point" name="checkbox-light-point"><br>
-
-        <label for="checkbox-grid-helper">gridHelperPlane: </label>
-        <input type="checkbox" id="checkbox-grid-helper" name="checkbox-grid-helper"><br>
-
-        <label for="checkbox-auto-rotate">cameraAutoRotate: </label>
-        <input type="checkbox" id="checkbox-auto-rotate" name="checkbox-auto-rotate"><br>
-
-        <label for="checkbox-camera-damping">cameraDamping: </label>
-        <input type="checkbox" checked="checked" id="checkbox-camera-damping" name="checkbox-camera-damping"><br>
-    </div>
-
-    <div class="container planets">
-        <span id="mercury">mercury</span>
-        <span id="venus">venus</span>
-        <span id="earth">earth</span>
-        <span id="moon">moon</span>
-        <span id="mars">mars</span>
-        <span id="jupiter">jupiter</span>
-        <span id="saturn">saturn</span>
-        <span id="uranus">uranus</span>
-        <span id="neptune">neptune</span>
-    </div>
-
-    <script type="module" src="/main.js"></script>
-</body>
-
+        <canvas id="canvas"></canvas>
+    </body>
 </html>

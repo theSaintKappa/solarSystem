@@ -4,8 +4,11 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
-    overflow: hidden;
+    font-family: 'Fira Code', monospace;
+}
+
+:root {
+    color: white;
 }
 
 body {
@@ -13,36 +16,21 @@ body {
 }
 
 .progress-container {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 1;
+    position: fixed;
+    inset: 0;
+    z-index: 2;
     background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    user-select: none;
-    transition-delay: 1s;
     transition-duration: 1s;
-}
-
-.progress-container label {
-    color: white;
-    text-align: center;
-    font-size: 3.5em;
 }
 
 .progress-bar {
     height: 30px;
     width: 15vw;
     margin: 5px;
-}
-
-.current-text {
-    color: white;
 }
 
 #canvas {
@@ -52,65 +40,47 @@ body {
     cursor: crosshair;
 }
 
-.container {
+.menu {
     position: absolute;
     backdrop-filter: blur(16px);
-    padding: 1rem;
     outline: 2px solid white;
+    z-index: 1;
 }
 
-.toggle input[type="checkbox"]:not(.toggle input:last-of-type) {
-    margin-bottom: 10px;
+.settings {
+    bottom: 0;
+    right: 0;
+    padding: 0.75rem;
+    border-radius: 0.5em 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
-.toggle input[type="checkbox"] {
+.settings label,
+.settings label input {
+    cursor: pointer;
+}
+
+.settings label {
+    font-size: 1.5rem;
+}
+
+.settings input[type='checkbox'] {
     transform: scale(2);
 }
 
-.author {
-    bottom: 0;
-    /* pointer-events: none; */
-    left: 0;
-    border-radius: 0 .5em 0 0;
+.settings label:last-child {
+    display: flex;
+    align-items: center;
 }
 
-.author span a:visited {
-    color: #0022ff;
-}
-
-.author span,
-.toggle label {
-    font-size: 20px;
-    color: white;
-}
-
-.toggle label {
-    font-size: 25px;
-}
-
-.toggle {
-    bottom: 0;
-    right: 0;
-    border-radius: .5em 0 0 0;
-    text-align: end;
-    user-select: none;
-}
-
-.toggle input {
-    pointer-events: all;
-    cursor: pointer;
-    margin-left: 5px;
-}
-
-.toggle select {
-    height: 25px;
-    font-size: 1em;
+.settings select {
+    height: 1.5rem;
     font-weight: bold;
-    margin-right: -8px;
-    transform: translateY(-2px)
 }
 
-.toggle select option {
+.settings select option {
     font-weight: bold;
 }
 
@@ -119,15 +89,10 @@ body {
     left: 0;
     display: flex;
     flex-direction: column;
-    padding: .8em;
-    border-radius: 0 0 .5em 0;
-    padding: 0;
+    border-radius: 0 0 0.5em 0;
 }
 
 .planets span {
-    color: white;
-    letter-spacing: 1px;
-    font-family: monospace;
     cursor: help;
     padding: 3px 8px 3px 4px;
     transition: color 100ms;

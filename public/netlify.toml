@@ -1,19 +1,5 @@
 [[redirects]]
-  from = "/"
-  to = "/jp"
-  status = 302
-  force = true
-  conditions = {Language = ["ja"]}
-
-[[redirects]]
-  from = "/"
-  to = "/pl"
-  status = 302
-  force = true
-  conditions = {Language = ["pl"]}
-
-[[redirects]]
-  from = "/en"
+  from = "/*"
   to = "/index.html"
-  status = 200
+  status = 301
   force = true
