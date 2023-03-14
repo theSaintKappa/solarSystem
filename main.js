@@ -17,6 +17,7 @@ const renderer = new THREE.WebGLRenderer({
     // setting the canvas
     canvas: document.querySelector('#canvas'),
     antialias: true,
+    alpha: true,
 });
 renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -73,18 +74,15 @@ controls.addEventListener('end', function () {
 // rt - posZ
 // lf - negZ
 
-function changeSkybox(skyboxName) {
-    scene.background = new THREE.CubeTextureLoader().setPath(`./assets/skybox${skyboxName}/`).load(['ft.png', 'bk.png', 'up.png', 'dn.png', 'rt.png', 'lf.png']);
+function changeSkybox(name) {
+    scene.background = new THREE.CubeTextureLoader().setPath(`./skyboxes/${name}/`).load(['ft.png', 'bk.png', 'up.png', 'dn.png', 'rt.png', 'lf.png']);
 }
-changeSkybox(1);
+changeSkybox('nebula');
 
-document.querySelector('[data-skybox]').addEventListener('change', (e) => {
-    if (e.target.value != 'none') {
-        changeSkybox(e.target.value);
-    } else {
-        scene.background = null;
-    }
-});
+document.querySelector('[data-skybox]').onchange = (e) => {
+    if (e.target.value === 'none') return (scene.background = null);
+    changeSkybox(e.target.value);
+};
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.185);
 ambientLight.position.set(0, 0, 0);
@@ -192,7 +190,7 @@ const addStar = () => {
 Array(7500).fill().forEach(addStar);
 
 // Sun
-const sunTexture = new THREE.TextureLoader().load('./assets/textures/sun.jpg');
+const sunTexture = new THREE.TextureLoader().load('./textures/sun.jpg');
 // const sunBump = new THREE.TextureLoader().load('earth-normalmap.jpg');
 const sunGeometry = new THREE.SphereGeometry(8, 64, 32);
 const sunMaterial = new THREE.MeshBasicMaterial({
@@ -203,8 +201,8 @@ const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 sun.position.set(0, 0, 0);
 
 // Mercury
-const mercuryTexture = new THREE.TextureLoader().load('./assets/textures/mercury.jpg');
-const mercuryBump = new THREE.TextureLoader().load('./assets/textures/mercury-normalmap.jpg');
+const mercuryTexture = new THREE.TextureLoader().load('./textures/mercury.jpg');
+const mercuryBump = new THREE.TextureLoader().load('./textures/mercury-normalmap.jpg');
 const mercuryGeometry = new THREE.SphereGeometry(2.5, 128, 128);
 const mercuryMaterial = new THREE.MeshStandardMaterial({
     map: mercuryTexture,
@@ -215,8 +213,8 @@ mercury.position.set(0, 24, 0);
 mercury.rotateZ(Math.PI / 2);
 
 // Venus
-const venusTexture = new THREE.TextureLoader().load('./assets/textures/venus.jpg');
-const venusBump = new THREE.TextureLoader().load('./assets/textures/venus-normalmap.jpg');
+const venusTexture = new THREE.TextureLoader().load('./textures/venus.jpg');
+const venusBump = new THREE.TextureLoader().load('./textures/venus-normalmap.jpg');
 const venusGeometry = new THREE.SphereGeometry(3, 128, 128);
 const venusMaterial = new THREE.MeshStandardMaterial({
     map: venusTexture,
@@ -227,8 +225,8 @@ venus.position.set(0, 40, 0);
 venus.rotateZ(Math.PI / 2);
 
 // Earth
-const earthTexture = new THREE.TextureLoader().load('./assets/textures/earth.jpg');
-const earthBump = new THREE.TextureLoader().load('./assets/textures/earth-normalmap.jpg');
+const earthTexture = new THREE.TextureLoader().load('./textures/earth.jpg');
+const earthBump = new THREE.TextureLoader().load('./textures/earth-normalmap.jpg');
 const earthGeometry = new THREE.SphereGeometry(4, 128, 128);
 // const earthMaterial = new THREE.MeshStandardMaterial({
 //     map: earthTexture,
@@ -238,7 +236,7 @@ const earthMaterial = new THREE.MeshPhongMaterial({
     specular: 0x333333,
     shininess: 5,
     map: earthTexture,
-    specularMap: new THREE.TextureLoader().load('./assets/textures/earth-specular.jpg'),
+    specularMap: new THREE.TextureLoader().load('./textures/earth-specular.jpg'),
     // normalMap: earthBump,
     // normalScale: new THREE.Vector2(0.85, 0.85)
 });
@@ -247,8 +245,8 @@ earth.position.set(0, 56, 0);
 earth.rotateZ(Math.PI / 2);
 
 // Moon
-const moonTexture = new THREE.TextureLoader().load('./assets/textures/moon.jpg');
-const moonBump = new THREE.TextureLoader().load('./assets/textures/moon-normalmap.jpg');
+const moonTexture = new THREE.TextureLoader().load('./textures/moon.jpg');
+const moonBump = new THREE.TextureLoader().load('./textures/moon-normalmap.jpg');
 const moonGeometry = new THREE.SphereGeometry(1.5, 128, 128);
 const moonMaterial = new THREE.MeshStandardMaterial({
     map: moonTexture,
@@ -259,8 +257,8 @@ moon.position.set(0, 9, 0);
 moon.rotateZ(Math.PI / 2);
 
 // Mars
-const marsTexture = new THREE.TextureLoader().load('./assets/textures/mars.jpg');
-const marsBump = new THREE.TextureLoader().load('./assets/textures/venus-normalmap.jpg');
+const marsTexture = new THREE.TextureLoader().load('./textures/mars.jpg');
+const marsBump = new THREE.TextureLoader().load('./textures/venus-normalmap.jpg');
 const marsGeometry = new THREE.SphereGeometry(3, 128, 128);
 const marsMaterial = new THREE.MeshStandardMaterial({
     map: marsTexture,
@@ -271,8 +269,8 @@ mars.position.set(0, 72, 0);
 mars.rotateZ(Math.PI / 2);
 
 // Jupiter
-const jupiterTexture = new THREE.TextureLoader().load('./assets/textures/jupiter.jpg');
-const jupiterBump = new THREE.TextureLoader().load('./assets/textures/venus-normalmap.jpg');
+const jupiterTexture = new THREE.TextureLoader().load('./textures/jupiter.jpg');
+const jupiterBump = new THREE.TextureLoader().load('./textures/venus-normalmap.jpg');
 const jupiterGeometry = new THREE.SphereGeometry(6, 128, 128);
 const jupiterMaterial = new THREE.MeshStandardMaterial({
     map: jupiterTexture,
@@ -283,8 +281,8 @@ jupiter.position.set(0, 88, 0);
 jupiter.rotateZ(Math.PI / 2);
 
 // Saturn
-const saturnTexture = new THREE.TextureLoader().load('./assets/textures/saturn.jpg');
-const saturnBump = new THREE.TextureLoader().load('./assets/textures/venus-normalmap.jpg');
+const saturnTexture = new THREE.TextureLoader().load('./textures/saturn.jpg');
+const saturnBump = new THREE.TextureLoader().load('./textures/venus-normalmap.jpg');
 const saturnGeometry = new THREE.SphereGeometry(5, 128, 128);
 const saturnMaterial = new THREE.MeshStandardMaterial({
     map: saturnTexture,
@@ -295,20 +293,20 @@ saturn.position.set(0, 104, 0);
 saturn.rotateZ(Math.PI / 2 + 0.3);
 saturn.rotateX(0.1);
 
-const saturnRingTexture = new THREE.TextureLoader().load('./assets/textures/saturn-ring.jpg');
+const saturnRingTexture = new THREE.TextureLoader().load('./textures/saturn-ring.jpg');
 const saturnRingGeometry = new THREE.RingGeometry(9.5, 6.5, 32);
 const saturnRingMaterial = new THREE.MeshStandardMaterial({
     map: saturnRingTexture,
     transparent: true,
-    alphaMap: new THREE.TextureLoader().load('./assets/textures/saturn-ring-alpha.gif'),
+    alphaMap: new THREE.TextureLoader().load('./textures/saturn-ring-alpha.gif'),
 });
 const saturnRing = new THREE.Mesh(saturnRingGeometry, saturnRingMaterial);
 saturn.add(saturnRing);
 saturnRing.rotateX(Math.PI / 2);
 
 // Uranus
-const uranusTexture = new THREE.TextureLoader().load('./assets/textures/uranus.jpg');
-const uranusBump = new THREE.TextureLoader().load('./assets/textures/venus-normalmap.jpg');
+const uranusTexture = new THREE.TextureLoader().load('./textures/uranus.jpg');
+const uranusBump = new THREE.TextureLoader().load('./textures/venus-normalmap.jpg');
 const uranusGeometry = new THREE.SphereGeometry(3.5, 128, 128);
 const uranusMaterial = new THREE.MeshStandardMaterial({
     map: uranusTexture,
@@ -319,8 +317,8 @@ uranus.position.set(0, 120, 0);
 uranus.rotateZ(Math.PI / 2);
 
 // Neptune
-const neptuneTexture = new THREE.TextureLoader().load('./assets/textures/neptune.jpg');
-const neptuneBump = new THREE.TextureLoader().load('./assets/textures/venus-normalmap.jpg');
+const neptuneTexture = new THREE.TextureLoader().load('./textures/neptune.jpg');
+const neptuneBump = new THREE.TextureLoader().load('./textures/venus-normalmap.jpg');
 const neptuneGeometry = new THREE.SphereGeometry(3.5, 128, 128);
 const neptuneMaterial = new THREE.MeshStandardMaterial({
     map: neptuneTexture,
