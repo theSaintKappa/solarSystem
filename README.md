@@ -1,5 +1,5 @@
-# THREE.js solar system model
+# THREE solarSystem 🌍
 
-A badly made solar system model using THREE.js
+A model of the solar system built with THREE.js
 
-You can view it [here.](https://space.saintkappa.tk)
+[Check it out](https://space.saintkappa.xyz)
