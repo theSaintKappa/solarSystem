@@ -2,4 +2,4 @@
 
 A model of the solar system built with THREE.js
 
-[Check it out](https://space.saintkappa.xyz)
+[Check it out](https://space.saintkappa.dev)
